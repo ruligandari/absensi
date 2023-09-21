@@ -1,0 +1,373 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Waktu pembuatan: 07 Sep 2023 pada 21.22
+-- Versi server: 10.2.44-MariaDB-cll-lve
+-- Versi PHP: 8.1.16
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `cavs3975_presensi`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `daftar_presensi`
+--
+
+CREATE TABLE `daftar_presensi` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `id_kelas` int(11) NOT NULL,
+  `id_mk` varchar(255) NOT NULL,
+  `jam_masuk` time NOT NULL,
+  `jam_keluar` time NOT NULL,
+  `tanggal` date NOT NULL,
+  `id_dosen` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `daftar_presensi`
+--
+
+INSERT INTO `daftar_presensi` (`id`, `id_kelas`, `id_mk`, `jam_masuk`, `jam_keluar`, `tanggal`, `id_dosen`) VALUES
+(24, 1, 'MK0004', '19:05:00', '20:00:00', '2023-09-06', 9),
+(27, 1, 'MK0001', '19:41:00', '23:45:00', '2023-09-07', 9),
+(28, 1, 'MK0004', '19:42:00', '23:45:00', '2023-09-07', 9),
+(29, 1, 'MK0005', '19:45:00', '21:45:00', '2023-09-07', 9),
+(30, 1, 'MK0004', '20:15:00', '20:40:00', '2023-09-07', 9);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `dosen`
+--
+
+CREATE TABLE `dosen` (
+  `id_dosen` int(11) UNSIGNED NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `nip` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `dosen`
+--
+
+INSERT INTO `dosen` (`id_dosen`, `nama`, `nip`, `email`, `password`) VALUES
+(1, 'Dosen 1', '12345678', 'dosen1@gmail.com', '$2y$10$pqgpNxHQqabbIJTTUBE/eeMf05lXeiYSLBPoV3o3rWggnPJbXOkx2'),
+(2, 'Dosen 2', '1234567', 'dosen2@gmail.com', '$2y$10$MRbjVejc13cfGkhdPgrJp.ET0mDxetLYLVj5z10oIA97sX47uWzfe'),
+(8, 'Dosen3', '321022160200001', 'qwerty@gmail.com', '$2y$10$u3/CDCFNCN7REGq3ts7WJeXDjBfSk7RdvAZuG6aQ6Gc4NU16j0RFO'),
+(9, 'Iwan Lesmana, M.Kom', '321000110', 'iwan.lesmana@uniku.ac.id', '$2y$10$Zfstmgehr161seF58Ea0dOychan3qOk8RWFWmVOODJSuRpE/SMqWS');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kelas`
+--
+
+CREATE TABLE `kelas` (
+  `id_kelas` int(11) NOT NULL,
+  `kelas` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `kelas`
+--
+
+INSERT INTO `kelas` (`id_kelas`, `kelas`) VALUES
+(1, 'TI 2017 A'),
+(2, 'TI 2017 B');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kontrak_kredit`
+--
+
+CREATE TABLE `kontrak_kredit` (
+  `id_kontrak` int(11) NOT NULL,
+  `id_mk` int(11) NOT NULL,
+  `nim` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `kontrak_kredit`
+--
+
+INSERT INTO `kontrak_kredit` (`id_kontrak`, `id_mk`, `nim`) VALUES
+(12, 0, '20170810075'),
+(13, 0, '20170810065');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `mahasiswa`
+--
+
+CREATE TABLE `mahasiswa` (
+  `nim` varchar(11) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `id_kelas` int(11) NOT NULL,
+  `jurusan` varchar(20) NOT NULL,
+  `jenis_kelamin` varchar(1) NOT NULL,
+  `ttl` varchar(100) NOT NULL,
+  `agama` varchar(20) NOT NULL,
+  `alamat` varchar(100) NOT NULL,
+  `foto` varchar(255) NOT NULL,
+  `data_wajah` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `mahasiswa`
+--
+
+INSERT INTO `mahasiswa` (`nim`, `nama`, `id_kelas`, `jurusan`, `jenis_kelamin`, `ttl`, `agama`, `alamat`, `foto`, `data_wajah`) VALUES
+('20170810065', 'Abdul Kapsul', 1, 'Teknik Informatika', 'L', '22 Maret 1997', 'Islam', 'Cirahong', '1694090026_320b3ae1a6e97bef6510.jpg', '-0.08951068669557571,0.0790179893374443,0.06658565998077393,-0.008986569941043854,-0.09495601803064346,-0.09784053266048431,-0.07581514120101929,-0.19212141633033752,0.10296492278575897,-0.12275417149066925,0.256793737411499,-0.04116841033101082,-0.14275376498699188,-0.21250019967556,-0.01042012870311737,0.17329737544059753,-0.24285168945789337,-0.1962326169013977,-0.05071311071515083,-0.0388411246240139,0.071168914437294,-0.08765960484743118,0.07374382019042969,0.059400979429483414,-0.1308390200138092,-0.36118313670158386,-0.05672002583742142,-0.09556588530540466,0.07521006464958191,-0.06156614422798157,-0.0854305624961853,0.017799142748117447,-0.27773159742355347,-0.023960238322615623,-0.08189702779054642,0.06074567139148712,0.012376178987324238,-0.09067519009113312,0.18228259682655334,-0.08492901921272278,-0.2629801332950592,0.035049766302108765,-0.02717082016170025,0.1773291826248169,0.2185736447572708,0.017116744071245193,0.0332474447786808,-0.07119428366422653,0.12890683114528656,-0.18830271065235138,0.06925206631422043,0.10549401491880417,0.07743790000677109,-0.03552941232919693,0.0018222917569801211,-0.1624843180179596,-0.03749559819698334,0.07647236436605453,-0.13778530061244965,-0.026227110996842384,0.013259594328701496,-0.08352550119161606,-0.01594976894557476,-0.11666140705347061,0.23859891295433044,0.14132702350616455,-0.08027218282222748,-0.12155898660421371,0.13120676577091217,-0.1609601378440857,-0.029897471889853477,0.06083159148693085,-0.09978348761796951,-0.15590262413024902,-0.396619975566864,-0.0057838959619402885,0.4080175757408142,0.07289035618305206,-0.21995873749256134,0.012010345235466957,-0.041686780750751495,0.024478349834680557,0.1564643532037735,0.11169329285621643,-0.07311780005693436,0.09203387796878815,-0.16539420187473297,0.019755292683839798,0.21894259750843048,-0.04229998588562012,-0.08101137727499008,0.21324282884597778,-0.009821109473705292,0.06850377470254898,0.04140021279454231,0.005485198460519314,-0.007741695269942284,0.03071388229727745,-0.11821138113737106,0.07024148106575012,0.03892376273870468,-0.018680397421121597,-0.05936146527528763,0.07504171878099442,-0.09365585446357727,0.032556742429733276,0.014886301942169666,0.029993856325745583,-0.0369657538831234,-0.02445722557604313,-0.13409677147865295,-0.09566982835531235,0.07492653280496597,-0.2520265579223633,0.19051067531108856,0.18785549700260162,0.05414273962378502,0.17672063410282135,0.0899871364235878,0.05313824489712715,-0.05585337057709694,-0.05413628742098808,-0.17073018848896027,-0.0002798383648041636,0.1467026323080063,-0.04609992727637291,0.14144471287727356,0.0554485023021698'),
+('20170810075', 'Hegar Paningkat Bagja', 1, 'Teknik Informatika', 'L', 'Kuningan, 29 April 1997', 'Islam', 'Ciwaru', '1687923580_05fe21c20a7b5be8ead3.jpg', '-0.07751461863517761,0.03333738073706627,0.01991586945950985,-0.045774344354867935,-0.14213936030864716,-0.029546743258833885,-0.07206094264984131,-0.1729528307914734,0.13757549226284027,-0.12750834226608276,0.2010146826505661,-0.053174640983343124,-0.10658921301364899,-0.006418351549655199,-0.07197722047567368,0.1594552844762802,-0.1366354078054428,-0.13785171508789062,-0.03895300254225731,0.013271024450659752,0.051019564270973206,-0.008784838952124119,-0.00950890127569437,0.047064557671546936,-0.0703645646572113,-0.26962220668792725,-0.09731319546699524,-0.07918902486562729,0.05519642308354378,-0.0907788798213005,-0.06916453689336777,-0.0010167168220505118,-0.17338325083255768,-0.017071621492505074,0.015474488027393818,0.1034596860408783,-0.025169597938656807,-0.08600032329559326,0.14521369338035583,-0.03636825084686279,-0.2844715118408203,0.04335571825504303,0.02013603039085865,0.19034110009670258,0.13273034989833832,0.017887746915221214,0.015496733598411083,-0.20018498599529266,0.0931633934378624,-0.1517111212015152,0.05213819444179535,0.10402441769838333,0.04713620990514755,0.0639960765838623,-0.03903879225254059,-0.09799433499574661,0.028760632500052452,0.12586261332035065,-0.13634762167930603,0.057874273508787155,0.1463593989610672,0.0034933085553348064,-0.013427956961095333,-0.10807152837514877,0.2602800130844116,0.14414910972118378,-0.15308474004268646,-0.18972158432006836,0.06801673769950867,-0.16128501296043396,-0.14735667407512665,0.08518880605697632,-0.1174943670630455,-0.20451383292675018,-0.3042745292186737,0.00972350686788559,0.48984426259994507,0.12063611298799515,-0.1973026543855667,-0.003746178699657321,-0.08112693578004837,0.007775265723466873,0.17546355724334717,0.15253037214279175,-0.005654314998537302,0.03167947381734848,-0.05461125075817108,-0.015890274196863174,0.27729228138923645,-0.03839293122291565,-0.0732354000210762,0.16255977749824524,-0.020142870023846626,0.09730947017669678,-0.04333534464240074,0.10710910707712173,-0.024279238656163216,0.05070921406149864,-0.09693086892366409,-0.028371140360832214,0.026038749143481255,0.0189890768378973,0.0034000130835920572,0.16395850479602814,-0.13863122463226318,0.1792529821395874,0.009114501997828484,0.041990287601947784,0.07066000998020172,0.057659514248371124,-0.08243890851736069,-0.059179238975048065,0.13095152378082275,-0.251366525888443,0.22436869144439697,0.17026400566101074,0.11728384345769882,0.08289358764886856,0.11350029706954956,0.0886647179722786,0.00174795463681221,-0.017314117401838303,-0.22712767124176025,0.0033816639333963394,0.08188595622777939,-0.040812935680150986,0.08933598548173904,0.02346927858889103');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `mata_kuliah`
+--
+
+CREATE TABLE `mata_kuliah` (
+  `id_mk` varchar(255) NOT NULL,
+  `nama_mk` varchar(255) NOT NULL,
+  `id_dosen` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `mata_kuliah`
+--
+
+INSERT INTO `mata_kuliah` (`id_mk`, `nama_mk`, `id_dosen`) VALUES
+('MK0001', 'Sistem Operasi', '9'),
+('MK0002', 'Al Jabar', '2'),
+('MK0003', 'Kalkulus', '2'),
+('MK0004', 'PTI', '9'),
+('MK0005', 'Struktur Data', '9');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `version` varchar(255) NOT NULL,
+  `class` varchar(255) NOT NULL,
+  `group` varchar(255) NOT NULL,
+  `namespace` varchar(255) NOT NULL,
+  `time` int(11) NOT NULL,
+  `batch` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`, `batch`) VALUES
+(1, '2023-03-16-174939', 'App\\Database\\Migrations\\DosenTable', 'default', 'App', 1678989399, 1),
+(2, '2023-03-16-175739', 'App\\Database\\Migrations\\MahasiswaTabel', 'default', 'App', 1678989971, 2),
+(3, '2023-03-16-180724', 'App\\Database\\Migrations\\PresensiTabel', 'default', 'App', 1678991068, 3),
+(4, '2023-05-01-084555', 'App\\Database\\Migrations\\StaffTabel', 'default', 'App', 1682931203, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `presensi`
+--
+
+CREATE TABLE `presensi` (
+  `id_presensi` int(11) NOT NULL,
+  `nim` varchar(255) NOT NULL,
+  `id_kelas` int(11) NOT NULL,
+  `id_mk` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL,
+  `status` enum('hadir','tidak hadir') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `presensi`
+--
+
+INSERT INTO `presensi` (`id_presensi`, `nim`, `id_kelas`, `id_mk`, `id`, `status`) VALUES
+(1, '20180810025', 1, '3001', 11, 'tidak hadir'),
+(2, '2348098001', 1, '3001', 11, 'tidak hadir'),
+(3, '20180810025', 1, '2001', 12, 'tidak hadir'),
+(4, '2348098001', 1, '2001', 12, 'tidak hadir'),
+(5, '20180810026', 2, '2001', 13, 'tidak hadir'),
+(6, '20180810025', 1, '2001', 14, 'tidak hadir'),
+(7, '2348098001', 1, '2001', 14, 'tidak hadir'),
+(8, '20180810026', 2, '3001', 15, 'hadir'),
+(9, '20180810026', 2, '2001', 16, 'hadir'),
+(10, '20180810025', 1, '2001', 17, 'tidak hadir'),
+(11, '2348098001', 1, '2001', 17, 'tidak hadir'),
+(12, '20180810025', 1, 'MK0004', 18, 'hadir'),
+(13, '20180810075', 1, 'MK0004', 18, 'hadir'),
+(14, '20180810025', 1, '2001', 19, 'hadir'),
+(15, '20180810075', 1, '2001', 19, 'hadir'),
+(16, '20170810075', 1, 'MK0001', 20, 'tidak hadir'),
+(17, '20170810075', 1, 'MK0002', 21, 'tidak hadir'),
+(18, '20170810075', 1, 'MK0001', 22, 'tidak hadir'),
+(19, '20170810075', 1, 'MK0003', 23, 'tidak hadir'),
+(20, '20170810075', 1, 'MK0004', 24, 'tidak hadir'),
+(21, '20170810065', 1, 'MK0001', 27, 'tidak hadir'),
+(22, '20170810075', 1, 'MK0001', 27, 'tidak hadir'),
+(23, '20170810065', 1, 'MK0004', 28, 'hadir'),
+(24, '20170810075', 1, 'MK0004', 28, 'tidak hadir'),
+(25, '20170810065', 1, 'MK0005', 29, 'hadir'),
+(26, '20170810075', 1, 'MK0005', 29, 'hadir'),
+(27, '20170810065', 1, 'MK0004', 30, 'tidak hadir'),
+(28, '20170810075', 1, 'MK0004', 30, 'tidak hadir');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `staff`
+--
+
+CREATE TABLE `staff` (
+  `id_staff` int(11) NOT NULL,
+  `nama_staff` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `staff`
+--
+
+INSERT INTO `staff` (`id_staff`, `nama_staff`, `email`, `password`) VALUES
+(1, 'Staff TU 1', 'stafftu1@gmail.com', '$2y$10$U5oDodWmTLVyRU7hp4bOuOTVqBCTYBa9VoF3pccKqMxv5X9u31Exa');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `daftar_presensi`
+--
+ALTER TABLE `daftar_presensi`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_kelas` (`id_kelas`),
+  ADD KEY `id_mk` (`id_mk`),
+  ADD KEY `id_dosen` (`id_dosen`);
+
+--
+-- Indeks untuk tabel `dosen`
+--
+ALTER TABLE `dosen`
+  ADD PRIMARY KEY (`id_dosen`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `email_2` (`email`),
+  ADD UNIQUE KEY `nip` (`nip`);
+
+--
+-- Indeks untuk tabel `kelas`
+--
+ALTER TABLE `kelas`
+  ADD PRIMARY KEY (`id_kelas`);
+
+--
+-- Indeks untuk tabel `kontrak_kredit`
+--
+ALTER TABLE `kontrak_kredit`
+  ADD PRIMARY KEY (`id_kontrak`);
+
+--
+-- Indeks untuk tabel `mahasiswa`
+--
+ALTER TABLE `mahasiswa`
+  ADD PRIMARY KEY (`nim`),
+  ADD KEY `id_kelas` (`id_kelas`);
+
+--
+-- Indeks untuk tabel `mata_kuliah`
+--
+ALTER TABLE `mata_kuliah`
+  ADD PRIMARY KEY (`id_mk`),
+  ADD KEY `id_dosen` (`id_dosen`);
+
+--
+-- Indeks untuk tabel `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `presensi`
+--
+ALTER TABLE `presensi`
+  ADD PRIMARY KEY (`id_presensi`),
+  ADD KEY `nim` (`nim`),
+  ADD KEY `id_kelas` (`id_kelas`),
+  ADD KEY `id_mk` (`id_mk`),
+  ADD KEY `id` (`id`);
+
+--
+-- Indeks untuk tabel `staff`
+--
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`id_staff`),
+  ADD UNIQUE KEY `id_staff` (`id_staff`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `daftar_presensi`
+--
+ALTER TABLE `daftar_presensi`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT untuk tabel `dosen`
+--
+ALTER TABLE `dosen`
+  MODIFY `id_dosen` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT untuk tabel `kelas`
+--
+ALTER TABLE `kelas`
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `kontrak_kredit`
+--
+ALTER TABLE `kontrak_kredit`
+  MODIFY `id_kontrak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT untuk tabel `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `presensi`
+--
+ALTER TABLE `presensi`
+  MODIFY `id_presensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
