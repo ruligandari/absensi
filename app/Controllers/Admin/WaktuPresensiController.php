@@ -23,7 +23,8 @@ class WaktuPresensiController extends BaseController
 
         return view('Admin/waktupresensi/index', $data);
     }
-    public function create(){
+    public function create()
+    {
         $modelKelas = new KelasModel();
         $kelas = $modelKelas->findAll();
         $modelMK = new MataKuliahModel();
@@ -36,17 +37,19 @@ class WaktuPresensiController extends BaseController
             'kelas' => $kelas,
             'dosen' => $dosen
         ];
-        return view ('Admin/waktupresensi/create',$data);
+        return view('Admin/waktupresensi/create', $data);
     }
-    public function rincian($kelas){
+    public function rincian($kelas)
+    {
         $presensiModel = new PresensiDataModel();
         $data = [
             'title' => 'Rincian Presensi',
             'mahasiswa' => $presensiModel->byKelas($kelas)
-        ]; 
-        return view('Admin/waktupresensi/rincian',$data);
+        ];
+        return view('Admin/waktupresensi/rincian', $data);
     }
-    public function save(){
+    public function save()
+    {
 
         $waktupresensiModel = new PresensiModel();
         $id_kelas = $this->request->getPost('id_kelas');
@@ -72,24 +75,25 @@ class WaktuPresensiController extends BaseController
         $mahasiswaModel = new MahasiswaModel();
         $dataMahasiswa = $mahasiswaModel->byKelas($id_kelas);
         $kontrakModel = new KontrakModel();
-        foreach($dataMahasiswa as $mahasiswa){
+        foreach ($dataMahasiswa as $mahasiswa) {
             $nim = $mahasiswa['nim'];
             $kontrakExist = $kontrakModel->checkKontrakExists($nim, $id_mk);
-            if($kontrakExist){
-            $data = [
-                'nim' => $mahasiswa['nim'],
-                'id_kelas' => $id_kelas,
-                'id_mk' => $id_mk,
-                'id' => $id_presensi,
-                'status' => 'tidak hadir'
-            ];
-            $presensiDataModel->insert($data);
+            if ($kontrakExist) {
+                $data = [
+                    'nim' => $mahasiswa['nim'],
+                    'id_kelas' => $id_kelas,
+                    'id_mk' => $id_mk,
+                    'id' => $id_presensi,
+                    'status' => 'tidak hadir'
+                ];
+                $presensiDataModel->insert($data);
+            }
         }
-    }
         session()->setFlashdata('success', 'Data berhasil ditambahkan');
         return redirect()->to(base_url('admin/data-waktupresensi'));
     }
-    public function form_edit($id){
+    public function form_edit($id)
+    {
         $waktuPresensiModel = new PresensiModel();
         $mkModel = new MataKuliahModel();
         $dosenModel = new DosenModel();
@@ -101,9 +105,10 @@ class WaktuPresensiController extends BaseController
             'dosen' => $dosenModel->findAll(),
             'kelas' => $kelasModel->findAll()
         ];
-        return view('admin/waktupresensi/update',$data);
+        return view('admin/waktupresensi/update', $data);
     }
-    public function update($id){
+    public function update($id)
+    {
         $id_kelas = $this->request->getVar('id_kelas');
         $id_mk = $this->request->getVar('id_mk');
         $jam_masuk = $this->request->getVar('jam_masuk');
@@ -121,8 +126,8 @@ class WaktuPresensiController extends BaseController
             'tanggal' => $tanggal,
             'id_dosen' => $id_dosen
         ];
-        if($data){
-            $waktuPresensiModel->update($id,$data);
+        if ($data) {
+            $waktuPresensiModel->update($id, $data);
             session()->setFlashdata('success', 'Data berhasil Diupdate');
             return redirect()->to(base_url('admin/data-waktupresensi'));
         }
@@ -134,5 +139,33 @@ class WaktuPresensiController extends BaseController
         session()->setFlashdata('success', 'Data berhasil dihapus');
         return redirect()->to(base_url('admin/data-waktupresensi'));
     }
+
+    public function updateKehadiran()
+
+    {
+        $id = $this->request->getPost('id');
+        $id_presensi = $this->request->getPost('id_presensi');
+        $status = $this->request->getPost('status');
+        $presensiDataModel = new PresensiDataModel();
+        $data = [
+            'status' => $status
+        ];
+        $presensiDataModel->update($id_presensi, $data);
+        session()->setFlashdata('success', 'Keterangan kehadiran berhasil Diupdate');
+        return redirect()->to(base_url('admin/waktupresensi/rincian/' . $id));
+    }
+    public function updateKehadiranDosen()
+
+    {
+        $id = $this->request->getPost('id');
+        $id_presensi = $this->request->getPost('id_presensi');
+        $status = $this->request->getPost('status');
+        $presensiDataModel = new PresensiDataModel();
+        $data = [
+            'status' => $status
+        ];
+        $presensiDataModel->update($id_presensi, $data);
+        session()->setFlashdata('success', 'Keterangan kehadiran berhasil Diupdate');
+        return redirect()->to(base_url('dosen/data-presensi'));
+    }
 }
- 

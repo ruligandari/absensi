@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,24 +5,26 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title><?= $title?> </title>
+  <title><?= $title ?> </title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="<?= base_url()?>vendors/feather/feather.css">
-  <link rel="stylesheet" href="<?= base_url()?>vendors/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="<?= base_url()?>vendors/ti-icons/css/themify-icons.css">
-  <link rel="stylesheet" href="<?= base_url()?>vendors/typicons/typicons.css">
-  <link rel="stylesheet" href="<?= base_url()?>vendors/simple-line-icons/css/simple-line-icons.css">
-  <link rel="stylesheet" href="<?= base_url()?>vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="<?= base_url() ?>vendors/feather/feather.css">
+  <link rel="stylesheet" href="<?= base_url() ?>vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="<?= base_url() ?>vendors/typicons/typicons.css">
+  <link rel="stylesheet" href="<?= base_url() ?>vendors/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="<?= base_url() ?>vendors/css/vendor.bundle.base.css">
   <!-- endinject -->
   <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="<?= base_url()?>vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-  <link rel="stylesheet" href="<?= base_url()?>js/select.dataTables.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="<?= base_url() ?>js/select.dataTables.min.css">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="<?= base_url()?>css/vertical-layout-light/style.css">
+  <link rel="stylesheet" href="<?= base_url() ?>css/vertical-layout-light/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="<?= base_url()?>images/favicon.png" />
+  <link rel="shortcut icon" href="<?= base_url() ?>images/favicon.png" />
+  <?= $this->renderSection('header'); ?>
 </head>
+
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
@@ -43,24 +44,24 @@
           </a>
         </div>
       </div>
-      <div class="navbar-menu-wrapper d-flex align-items-top"> 
+      <div class="navbar-menu-wrapper d-flex align-items-top">
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-            <h1 class="welcome-text">Selamat Datang <span class="text-black fw-bold"><?= session()->get('nama')?></span></h1>
+            <h1 class="welcome-text">Selamat Datang <span class="text-black fw-bold"><?= session()->get('nama') ?></span></h1>
             <h3 class="welcome-sub-text">Sistem Presensi Mahasiswa </h3>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item dropdown d-none d-lg-block user-dropdown">
             <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-              <img class="img-xs rounded-circle" src="<?= base_url()?>images/faces/face8.jpg" alt="Profile image"> </a>
+              <img class="img-xs rounded-circle" src="<?= base_url() ?>images/faces/face8.jpg" alt="Profile image"> </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <div class="dropdown-header text-center">
-                <img class="img-md rounded-circle" src="<?= base_url()?>images/faces/face8.jpg" alt="Profile image">
-                <p class="mb-1 mt-3 font-weight-semibold"><?= session()->get('nama')?></p>
-                <p class="fw-light text-muted mb-0"><?= session()->get('email')?></p>
+                <img class="img-md rounded-circle" src="<?= base_url() ?>images/faces/face8.jpg" alt="Profile image">
+                <p class="mb-1 mt-3 font-weight-semibold"><?= session()->get('nama') ?></p>
+                <p class="fw-light text-muted mb-0"><?= session()->get('email') ?></p>
               </div>
-              <a class="dropdown-item" href="<?= base_url('logout')?>"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+              <a class="dropdown-item" href="<?= base_url('logout') ?>"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
             </div>
           </li>
         </ul>
@@ -227,20 +228,20 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('dosen/dashboard')?>">
+            <a class="nav-link" href="<?= base_url('dosen/dashboard') ?>">
               <i class="mdi mdi-grid-large menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
           <li class="nav-item nav-category">Data Presensi</li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('dosen/data-waktupresensi')?>">
+            <a class="nav-link" href="<?= base_url('dosen/data-waktupresensi') ?>">
               <i class="mdi mdi-account-box-outline menu-icon"></i>
               <span class="menu-title">Waktu Presensi</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('dosen/data-presensi')?>">
+            <a class="nav-link" href="<?= base_url('dosen/data-presensi') ?>">
               <i class="mdi mdi-account-box-outline menu-icon"></i>
               <span class="menu-title">Data Presensi</span>
             </a>
@@ -250,12 +251,12 @@
       <!-- partial -->
       <div class="main-panel">
 
-        <?= $this->renderSection('content')?>
+        <?= $this->renderSection('content') ?>
 
         <!-- Footer -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © <?= date('Y')?>. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © <?= date('Y') ?>. All rights reserved.</span>
           </div>
         </footer>
         <!-- Footer -->
@@ -267,27 +268,28 @@
   <!-- container-scroller -->
 
   <!-- plugins:js -->
-  <script src="<?=base_url()?>vendors/js/vendor.bundle.base.js"></script>
+  <script src="<?= base_url() ?>vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
-  <script src="<?=base_url()?>vendors/chart.js/Chart.min.js"></script>
-  <script src="<?=base_url()?>vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-  <script src="<?=base_url()?>vendors/progressbar.js/progressbar.min.js"></script>
+  <script src="<?= base_url() ?>vendors/chart.js/Chart.min.js"></script>
+  <script src="<?= base_url() ?>vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+  <script src="<?= base_url() ?>vendors/progressbar.js/progressbar.min.js"></script>
 
   <!-- End plugin js for this page -->
   <!-- inject:js -->
-  <script src="<?=base_url()?>js/off-canvas.js"></script>
-  <script src="<?=base_url()?>js/hoverable-collapse.js"></script>
-  <script src="<?=base_url()?>js/template.js"></script>
-  <script src="<?=base_url()?>js/settings.js"></script>
-  <script src="<?=base_url()?>js/todolist.js"></script>
+  <script src="<?= base_url() ?>js/off-canvas.js"></script>
+  <script src="<?= base_url() ?>js/hoverable-collapse.js"></script>
+  <script src="<?= base_url() ?>js/template.js"></script>
+  <script src="<?= base_url() ?>js/settings.js"></script>
+  <script src="<?= base_url() ?>js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="<?=base_url()?>js/jquery.cookie.js" type="text/javascript"></script>
-  <script src="<?=base_url()?>js/dashboard.js"></script>
-  <script src="<?=base_url()?>js/Chart.roundedBarCharts.js"></script>
+  <script src="<?= base_url() ?>js/jquery.cookie.js" type="text/javascript"></script>
+  <script src="<?= base_url() ?>js/dashboard.js"></script>
+  <script src="<?= base_url() ?>js/Chart.roundedBarCharts.js"></script>
+
+  <?= $this->renderSection('script'); ?>
   <!-- End custom js for this page-->
 </body>
 
 </html>
-

@@ -8,6 +8,7 @@ use App\Models\KelasModel;
 use App\Models\MahasiswaModel;
 use App\Models\MataKuliahModel;
 use App\Models\PresensiModel;
+use App\Models\PresensiDataModel;
 
 class WaktuPresensiController extends BaseController
 {
@@ -22,7 +23,8 @@ class WaktuPresensiController extends BaseController
 
         return view('Admin/waktupresensi/index', $data);
     }
-    public function create(){
+    public function create()
+    {
         $modelKelas = new KelasModel();
         $kelas = $modelKelas->findAll();
         $modelMK = new MataKuliahModel();
@@ -35,9 +37,10 @@ class WaktuPresensiController extends BaseController
             'kelas' => $kelas,
             'dosen' => $dosen
         ];
-        return view ('Admin/waktupresensi/create',$data);
+        return view('Admin/waktupresensi/create', $data);
     }
-    public function rincian($kelas){
+    public function rincian($kelas)
+    {
         $mahasiswaModel = new MahasiswaModel();
         $mahasiswaModel->byKelas($kelas);
         $data = [
@@ -45,9 +48,10 @@ class WaktuPresensiController extends BaseController
             'kelas' => $mahasiswaModel
         ];
         dd($data);
-        return view('Admin/waktupresensi/rincian',$data);
+        return view('Admin/waktupresensi/rincian', $data);
     }
-    public function save(){
+    public function save()
+    {
 
         $presensiModel = new PresensiModel();
 
@@ -79,9 +83,23 @@ class WaktuPresensiController extends BaseController
         return redirect()->to(base_url('admin/data-waktupresensi'));
     }
 
-    public function create_presensi(){
+    public function create_presensi()
+    {
         $wajah = $this->request->getVar('absen');
         dd($wajah);
     }
+    public function updateKehadiran()
+
+    {
+        $id = $this->request->getPost('id');
+        $id_presensi = $this->request->getPost('id_presensi');
+        $status = $this->request->getPost('status');
+        $presensiDataModel = new PresensiDataModel();
+        $data = [
+            'status' => $status
+        ];
+        $presensiDataModel->update($id_presensi, $data);
+        session()->setFlashdata('success', 'Keterangan kehadiran berhasil Diupdate');
+        return redirect()->to(base_url('admin/waktupresensi/rincian/' . $id));
+    }
 }
- 

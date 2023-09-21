@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,25 +5,27 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title><?= $title?> </title>
+  <title><?= $title ?> </title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-  <link rel="stylesheet" href="<?= base_url()?>vendors/feather/feather.css">
-  <link rel="stylesheet" href="<?= base_url()?>vendors/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="<?= base_url()?>vendors/ti-icons/css/themify-icons.css">
-  <link rel="stylesheet" href="<?= base_url()?>vendors/typicons/typicons.css">
-  <link rel="stylesheet" href="<?= base_url()?>vendors/simple-line-icons/css/simple-line-icons.css">
-  <link rel="stylesheet" href="<?= base_url()?>vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="<?= base_url() ?>vendors/feather/feather.css">
+  <link rel="stylesheet" href="<?= base_url() ?>vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="<?= base_url() ?>vendors/typicons/typicons.css">
+  <link rel="stylesheet" href="<?= base_url() ?>vendors/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="<?= base_url() ?>vendors/css/vendor.bundle.base.css">
+  <?= $this->renderSection('header'); ?>
   <!-- endinject -->
   <!-- Plugin css for this page -->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="<?= base_url('css/vertical-layout-light/style.css')?>">
+  <link rel="stylesheet" href="<?= base_url('css/vertical-layout-light/style.css') ?>">
   <!-- endinject -->
-  <link rel="shortcut icon" href="<?= base_url('images/favicon.png')?>" />
+  <link rel="shortcut icon" href="<?= base_url('images/favicon.png') ?>" />
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
 </head>
+
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
@@ -44,24 +45,24 @@
           </a>
         </div>
       </div>
-      <div class="navbar-menu-wrapper d-flex align-items-top"> 
+      <div class="navbar-menu-wrapper d-flex align-items-top">
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-            <h1 class="welcome-text">Selamat Datang <span class="text-black fw-bold"><?= session()->get('nama')?></span></h1>
+            <h1 class="welcome-text">Selamat Datang <span class="text-black fw-bold"><?= session()->get('nama') ?></span></h1>
             <h3 class="welcome-sub-text">Sistem Presensi Mahasiswa </h3>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item dropdown d-none d-lg-block user-dropdown">
             <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-              <img class="img-xs rounded-circle" src="<?= base_url()?>images/faces/face8.jpg" alt="Profile image"> </a>
+              <img class="img-xs rounded-circle" src="<?= base_url() ?>images/faces/face8.jpg" alt="Profile image"> </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <div class="dropdown-header text-center">
-                <img class="img-md rounded-circle" src="<?= base_url()?>images/faces/face8.jpg" alt="Profile image">
-                <p class="mb-1 mt-3 font-weight-semibold"><?= session()->get('nama')?></p>
-                <p class="fw-light text-muted mb-0"><?= session()->get('email')?></p>
+                <img class="img-md rounded-circle" src="<?= base_url() ?>images/faces/face8.jpg" alt="Profile image">
+                <p class="mb-1 mt-3 font-weight-semibold"><?= session()->get('nama') ?></p>
+                <p class="fw-light text-muted mb-0"><?= session()->get('email') ?></p>
               </div>
-              <a class="dropdown-item" href="<?= base_url('logout')?>"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+              <a class="dropdown-item" href="<?= base_url('logout') ?>"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
             </div>
           </li>
         </ul>
@@ -228,35 +229,35 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('admin/dashboard')?>">
+            <a class="nav-link" href="<?= base_url('admin/dashboard') ?>">
               <i class="mdi mdi-grid-large menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
           <li class="nav-item nav-category">Data Mahasiswa</li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('admin/data-mahasiswa')?>">
+            <a class="nav-link" href="<?= base_url('admin/data-mahasiswa') ?>">
               <i class="mdi mdi-account menu-icon"></i>
               <span class="menu-title">Data Mahasiswa</span>
             </a>
           </li>
           <li class="nav-item nav-category">Data Presensi</li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('admin/data-waktupresensi')?>">
+            <a class="nav-link" href="<?= base_url('admin/data-waktupresensi') ?>">
               <i class="mdi mdi-account-card-details menu-icon"></i>
               <span class="menu-title">Data Presensi</span>
             </a>
           </li>
           <li class="nav-item nav-category">Data Dosen</li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('admin/data-dosen')?>">
+            <a class="nav-link" href="<?= base_url('admin/data-dosen') ?>">
               <i class="mdi mdi-account-box-outline menu-icon"></i>
               <span class="menu-title">Data Dosen</span>
             </a>
           </li>
           <li class="nav-item nav-category">Data Mata Kuliah</li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('admin/data-matakuliah')?>">
+            <a class="nav-link" href="<?= base_url('admin/data-matakuliah') ?>">
               <i class="mdi mdi-account-box-outline menu-icon"></i>
               <span class="menu-title">Data Mata Kuliah</span>
             </a>
@@ -266,12 +267,12 @@
       <!-- partial -->
       <div class="main-panel">
 
-        <?= $this->renderSection('content')?>
-        
+        <?= $this->renderSection('content') ?>
+
         <!-- Footer -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © <?= date('Y')?>. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © <?= date('Y') ?>. All rights reserved.</span>
           </div>
         </footer>
         <!-- Footer -->
@@ -281,21 +282,20 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
-  
+
   <!-- plugins:js -->
-  <script src="<?=base_url()?>vendors/js/vendor.bundle.base.js"></script>
+  <script src="<?= base_url() ?>vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
-  <script src="<?=base_url()?>vendors/chart.js/Chart.min.js"></script>
-  <script src="<?=base_url()?>vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-  <script src="<?=base_url()?>vendors/progressbar.js/progressbar.min.js"></script>
-  
+  <script src="<?= base_url() ?>vendors/chart.js/Chart.min.js"></script>
+  <script src="<?= base_url() ?>vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+  <script src="<?= base_url() ?>vendors/progressbar.js/progressbar.min.js"></script>
+
   <!-- End plugin js for this page -->
   <!-- inject:js -->
-  <script src="<?=base_url()?>js/dashboard.js"></script>
+  <script src="<?= base_url() ?>js/dashboard.js"></script>
   <!-- End custom js for this page-->
-  <?= $this->renderSection('script')?>
+  <?= $this->renderSection('script') ?>
 </body>
 
 </html>
-
